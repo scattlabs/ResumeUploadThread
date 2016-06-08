@@ -12,15 +12,17 @@ import util.FTPException;
  */
 public class UploadTask extends SwingWorker<Void, Void> {
 
-	private String host = "172.18.2.75";
+	private String host = "172.18.2.74";
 	private int port = 21;
 	private String username = "updown";
 	private String password = "admin";
 
 	private PartFile partFile;
+	private String destdir;
 
-	public UploadTask(PartFile partFile) {
+	public UploadTask(PartFile partFile, String destDir) {
 		this.setPartFile(partFile);
+		this.destdir = destDir;
 	}
 
 	/**
@@ -31,7 +33,7 @@ public class UploadTask extends SwingWorker<Void, Void> {
 		FTPUtility util = new FTPUtility(host, port, username, password);
 		try {
 			util.connect();
-			util.uploadFile(partFile.getFileName(), "");
+			util.uploadFile(partFile.getFileName(), destdir);
 			util.writeFileBytes(partFile.getBuffer(), 0, partFile.getByteRead());
 
 		} catch (FTPException ex) {

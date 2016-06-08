@@ -32,6 +32,7 @@ public class UploadController {
 	private int jumlahFileKategori = 4; // jumlah file dalam 1 kategori
 	private int jumlahFileUploadcurrent = 0; // jumlah yang file yang sedang
 												// dikirim
+	private String destdir = "";
 
 	private HashMap<Integer, Integer> listFileYangSedangDikirim = new HashMap<Integer, Integer>();
 
@@ -79,6 +80,7 @@ public class UploadController {
 
 	public void splitFile(File fileUpload, String destDir) {
 		logger.info("splitFile");
+		this.destdir = destDir;
 		FileInputStream inputStream;
 		byte[] buffer; // 1MB
 		int bytesRead = -1;
@@ -144,7 +146,7 @@ public class UploadController {
 		}
 
 		while (start <= end) {
-			UploadTask task = new UploadTask(mapPartFile.get(start));
+			UploadTask task = new UploadTask(mapPartFile.get(start), destdir);
 			task.execute();
 			start++;
 		}
@@ -191,5 +193,13 @@ public class UploadController {
 
 	public void setJumlahFileUploadcurrent(int jumlahFileUploadcurrent) {
 		this.jumlahFileUploadcurrent = jumlahFileUploadcurrent;
+	}
+
+	public String getDestdir() {
+		return destdir;
+	}
+
+	public void setDestdir(String destdir) {
+		this.destdir = destdir;
 	}
 }
