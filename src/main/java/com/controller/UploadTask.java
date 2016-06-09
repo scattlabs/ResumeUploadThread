@@ -1,10 +1,10 @@
-package controller;
+package com.controller;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-import model.PartFile;
-import util.FTPException;
+import com.model.PartFile;
+import com.util.FTPException;
 
 /**
  * @author ScattLabs
@@ -12,7 +12,7 @@ import util.FTPException;
  */
 public class UploadTask extends SwingWorker<Void, Void> {
 
-	private String host = "172.18.2.74";
+	private String host = "127.0.0.1";
 	private int port = 21;
 	private String username = "updown";
 	private String password = "admin";

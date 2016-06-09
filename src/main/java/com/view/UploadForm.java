@@ -1,7 +1,7 @@
 /**
  * 
  */
-package view;
+package com.view;
 
 import java.awt.EventQueue;
 
@@ -17,7 +17,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import controller.UploadController;
+import com.config.DataHolder;
+import com.controller.UploadController;
 
 import javax.swing.JProgressBar;
 
@@ -42,6 +43,7 @@ public class UploadForm implements PropertyChangeListener {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		DataHolder.getInstance().execute();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				String lookAndFeel = javax.swing.UIManager.getSystemLookAndFeelClassName();
