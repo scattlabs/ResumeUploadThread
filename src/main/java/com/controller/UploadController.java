@@ -150,7 +150,7 @@ public class UploadController {
 			setUploadCurrent(checkFile(fileUpload));
 			if (getUploadCurrent() == null) {
 				setUploadCurrent(new Upload(0, fileUpload.getName(), (int) fileUpload.length(), read,
-						mapPartFile.size(), groupSize, groupAmount, 0, 0));
+						mapPartFile.size(), groupSize, groupAmount, lastGroup, 0));
 				uploadDao.save(getUploadCurrent());
 			}
 			sendPartGroup();
@@ -170,7 +170,7 @@ public class UploadController {
 		int end = 0;
 		if (lastGroup == 1) {
 			start = 1;
-			end = 1 * groupSize;
+			end = mapPartFile.size();
 		} else if (lastGroup == groupAmount) {
 			start = ((lastGroup - 1) * groupSize) + 1;
 			end = mapPartFile.size();

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Learn;
+package learn;
 
 /**
  * @author ScattLabs
