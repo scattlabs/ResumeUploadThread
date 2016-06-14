@@ -1,4 +1,4 @@
-/**
+/** 
  * 
  */
 package learn;
@@ -6,8 +6,6 @@ package learn;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -26,7 +24,7 @@ public class ApacheFtpClient {
 
 	public static void main(String[] args) {
 		ftpClient = new ApacheFtpClient();
-		ftpClient.upload("172.18.2.75", "updown", "admin", "F:\\repo.txt", "repo.txt");
+		ftpClient.upload("172.18.2.75", "updown", "admin", "F:\\TestAppend.txt", "repo.txt");
 
 	}
 
@@ -36,24 +34,29 @@ public class ApacheFtpClient {
 			client.login(userName, password);
 			client.setFileType(FTPClient.BINARY_FILE_TYPE);
 			client.enterLocalPassiveMode();
-			FileInputStream inputStream;
-			InputStream inputStreamSend;
-			File file = new File(fileName);
-			try {
-				inputStream = new FileInputStream(file);
-				byte[] bytesIn = new byte[1];
-				int read = 0;
 
-				while ((read = inputStream.read(bytesIn)) != -1) {
-					System.out.println(new String(bytesIn));
-					inputStreamSend = new ByteArrayInputStream(bytesIn);
-					client.appendFile(remoteFileName, inputStreamSend);
-				}
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-			}
+			// code to connect and login....
+
+			/*
+			 * String filePath = "Flow Upload.png"; FTPFile file =
+			 * client.mlistFile(filePath); long size = file.getSize();
+			 * System.out.println("File size = " + size);
+			 * System.out.println(file.getName());
+			 */
+
+			File file2 = new File(fileName);
+			InputStream inputStream = new FileInputStream(file2);
+			byte[] bytesIn = new byte[20];
+			inputStream.read(bytesIn);
+			System.out.println(new String(bytesIn));
+			InputStream inputStreamSend = new ByteArrayInputStream(bytesIn);
+			client.appendFile(remoteFileName, inputStreamSend);
+
+			bytesIn = new byte[24];
+			inputStream.read(bytesIn);
+			System.out.println(new String(bytesIn));
+			inputStreamSend = new ByteArrayInputStream(bytesIn);
+			client.appendFile(remoteFileName, inputStreamSend);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

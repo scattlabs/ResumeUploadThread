@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.dao.UploadDao;
+import com.dao.UploadDao2;
 
 /**
  *
@@ -28,6 +29,7 @@ public class DataHolder extends SwingWorker<Void, Void> {
 
 	static ApplicationContext ctx;
 	static UploadDao uploadDao;
+	static UploadDao2 uploadDao2;
 
 	public ApplicationContext getCtx() {
 		if (ctx == null) {
@@ -43,9 +45,17 @@ public class DataHolder extends SwingWorker<Void, Void> {
 		return uploadDao;
 	}
 
+	public UploadDao2 getUploadDao2() {
+		if (uploadDao2 == null) {
+			uploadDao2 = (UploadDao2) getCtx().getBean("uploadDaoImpl2");
+		}
+		return uploadDao2;
+	}
+
 	public void initializeData() {
 		getCtx();
 		getUploadDao();
+		getUploadDao2();
 	}
 
 	@Override
